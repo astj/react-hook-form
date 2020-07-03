@@ -79,7 +79,10 @@ const Controller = <
     });
 
   const commonTask = (
-    event: OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>[],
+    event: [
+      OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>,
+      ...unknown[]
+    ],
   ) => {
     const data = getInputValue(event[0], isCheckboxInput);
     setInputStateValue(data);
@@ -145,7 +148,10 @@ const Controller = <
   };
 
   const onChange = (
-    ...event: OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>[]
+    ...event: [
+      OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>,
+      ...unknown[]
+    ]
   ) =>
     setValue(name, commonTask(event), {
       shouldValidate: shouldValidate(),

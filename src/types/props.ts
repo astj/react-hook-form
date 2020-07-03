@@ -45,7 +45,10 @@ export type ControllerProps<
     control?: TControl;
     render?: (data: {
       onChange: (
-        ...event: OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>[]
+        ...event: [
+          OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>,
+          ...unknown[]
+        ]
       ) => void;
       onBlur: () => void;
       value: FieldValuesFromControl<TControl>[TFieldName];
