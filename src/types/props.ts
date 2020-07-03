@@ -32,19 +32,22 @@ export type ControllerProps<
     | 'input'
     | 'select'
     | 'textarea',
+  TFieldName extends FieldName<FieldValuesFromControl<TControl>>,
   TControl extends Control = Control
 > = Assign<
   {
-    name: FieldName<FieldValuesFromControl<TControl>>;
+    name: TFieldName;
     as?: TAs;
     rules?: ValidationRules;
     onFocus?: () => void;
     defaultValue?: unknown;
     control?: TControl;
     render?: (data: {
-      onChange: (...event: any[]) => void;
+      onChange: (
+        ...event: FieldValuesFromControl<TControl>[TFieldName][]
+      ) => void;
       onBlur: () => void;
-      value: any;
+      value: FieldValuesFromControl<TControl>[TFieldName];
     }) => React.ReactElement;
   },
   AsProps<TAs>

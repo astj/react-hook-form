@@ -8,7 +8,7 @@ import skipValidation from './logic/skipValidation';
 import isNameInFieldArray from './logic/isNameInFieldArray';
 import { useFormContext } from './useFormContext';
 import { VALUE } from './constants';
-import { Control } from './types/form';
+import { Control, FieldName, FieldValuesFromControl } from './types/form';
 import { ControllerProps } from './types/props';
 
 const Controller = <
@@ -18,6 +18,7 @@ const Controller = <
     | 'input'
     | 'select'
     | 'textarea',
+  TFieldName extends FieldName<FieldValuesFromControl<TControl>>,
   TControl extends Control = Control
 >({
   name,
@@ -28,7 +29,7 @@ const Controller = <
   control,
   onFocus,
   ...rest
-}: ControllerProps<TAs, TControl>) => {
+}: ControllerProps<TAs, TFieldName, TControl>) => {
   const methods = useFormContext();
   const {
     defaultValuesRef,
@@ -136,7 +137,7 @@ const Controller = <
     }
   };
 
-  const onChange = (...event: any[]) =>
+  const onChange = (...event: TFieldName[]) =>
     setValue(name, commonTask(event), {
       shouldValidate: shouldValidate(),
       shouldDirty: true,
