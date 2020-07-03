@@ -224,6 +224,11 @@ export type FieldValuesFromControl<
   TControl extends Control
 > = TControl extends Control<infer TFieldValues> ? TFieldValues : never;
 
+export type OnChangeEvent<T extends unknown> =
+  | T
+  | { target: { value: T; type: unknown } }
+  | { target: { checked: T; type: unknown } };
+
 export type Control<TFieldValues extends FieldValues = FieldValues> = Pick<
   UseFormMethods<TFieldValues>,
   'register' | 'unregister' | 'setValue' | 'getValues' | 'trigger' | 'formState'

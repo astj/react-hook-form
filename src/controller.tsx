@@ -8,7 +8,12 @@ import skipValidation from './logic/skipValidation';
 import isNameInFieldArray from './logic/isNameInFieldArray';
 import { useFormContext } from './useFormContext';
 import { VALUE } from './constants';
-import { Control, FieldName, FieldValuesFromControl } from './types/form';
+import {
+  Control,
+  FieldName,
+  FieldValuesFromControl,
+  OnChangeEvent,
+} from './types/form';
 import { ControllerProps } from './types/props';
 
 const Controller = <
@@ -73,7 +78,9 @@ const Controller = <
       isSubmitted,
     });
 
-  const commonTask = (event: any[]) => {
+  const commonTask = (
+    event: OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>[],
+  ) => {
     const data = getInputValue(event[0], isCheckboxInput);
     setInputStateValue(data);
     valueRef.current = data;
@@ -137,7 +144,9 @@ const Controller = <
     }
   };
 
-  const onChange = (...event: TFieldName[]) =>
+  const onChange = (
+    ...event: OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>[]
+  ) =>
     setValue(name, commonTask(event), {
       shouldValidate: shouldValidate(),
       shouldDirty: true,

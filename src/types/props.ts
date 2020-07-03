@@ -5,6 +5,7 @@ import {
   FieldName,
   ValidationRules,
   Control,
+  OnChangeEvent,
 } from './form';
 import { Assign } from './utils';
 import * as React from 'react';
@@ -44,7 +45,7 @@ export type ControllerProps<
     control?: TControl;
     render?: (data: {
       onChange: (
-        ...event: FieldValuesFromControl<TControl>[TFieldName][]
+        ...event: OnChangeEvent<FieldValuesFromControl<TControl>[TFieldName]>[]
       ) => void;
       onBlur: () => void;
       value: FieldValuesFromControl<TControl>[TFieldName];
