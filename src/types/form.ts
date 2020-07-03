@@ -226,8 +226,7 @@ export type FieldValuesFromControl<
 
 export type OnChangeEvent<T extends unknown> =
   | T
-  | { target: { value: T; type: unknown } }
-  | { target: { checked: T; type: unknown } };
+  | { type: unknown; target: { value: T } | { checked: T } };
 
 export type Control<TFieldValues extends FieldValues = FieldValues> = Pick<
   UseFormMethods<TFieldValues>,
